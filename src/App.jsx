@@ -145,6 +145,47 @@ function App() {
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50"></div>
+        
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute top-40 right-20 w-16 h-16 bg-purple-200 rounded-full opacity-30"
+            animate={{
+              y: [0, 20, 0],
+              x: [0, -15, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-32 left-20 w-12 h-12 bg-indigo-200 rounded-full opacity-25"
+            animate={{
+              y: [0, -15, 0],
+              x: [0, 20, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+        
         <div className="relative z-10 text-center px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -188,7 +229,10 @@ function App() {
               <Download size={20} />
               Download CV
             </button>
-            <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200">
+            <button 
+              onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200"
+            >
               View Projects
             </button>
           </motion.div>
