@@ -77,7 +77,7 @@ function App() {
       {/* Navigation */}
       <motion.nav 
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrollY > 50 ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+          scrollY > 50 ? 'apple-glass shadow-lg shadow-gray-200/20' : 'bg-transparent'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -98,7 +98,7 @@ function App() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-800 hover:text-black transition-colors duration-200 font-medium"
                   whileHover={{ y: -2 }}
                 >
                   {item}
@@ -110,7 +110,7 @@ function App() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-800 hover:text-black"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -121,7 +121,7 @@ function App() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
-            className="md:hidden bg-white border-t"
+            className="md:hidden apple-glass border-t border-gray-200/50"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -131,7 +131,7 @@ function App() {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="block text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                  className="block text-gray-800 hover:text-black transition-colors duration-200 font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item}
@@ -144,12 +144,12 @@ function App() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50"></div>
+        <div className="absolute inset-0 apple-gradient"></div>
         
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20"
+            className="absolute top-20 left-10 w-20 h-20 bg-gray-200/30 rounded-full opacity-40"
             animate={{
               y: [0, -20, 0],
               x: [0, 10, 0],
@@ -161,7 +161,7 @@ function App() {
             }}
           />
           <motion.div
-            className="absolute top-40 right-20 w-16 h-16 bg-purple-200 rounded-full opacity-30"
+            className="absolute top-40 right-20 w-16 h-16 bg-gray-300/20 rounded-full opacity-30"
             animate={{
               y: [0, 20, 0],
               x: [0, -15, 0],
@@ -173,7 +173,7 @@ function App() {
             }}
           />
           <motion.div
-            className="absolute bottom-32 left-20 w-12 h-12 bg-indigo-200 rounded-full opacity-25"
+            className="absolute bottom-32 left-20 w-12 h-12 bg-gray-400/20 rounded-full opacity-30"
             animate={{
               y: [0, -15, 0],
               x: [0, 20, 0],
@@ -193,7 +193,7 @@ function App() {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">
+            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 text-4xl font-bold shadow-lg">
               MB
             </div>
           </motion.div>
@@ -208,7 +208,7 @@ function App() {
           </motion.h1>
           
           <motion.p
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -222,16 +222,13 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <button 
-              onClick={() => window.open('/Milan-Blaz-CV.pdf', '_blank')}
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2"
-            >
+            <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium">
               <Download size={20} />
               Download CV
             </button>
             <button 
               onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200"
+              className="border-2 border-black text-black px-8 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-200 font-medium"
             >
               View Projects
             </button>
@@ -248,7 +245,7 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding bg-gray-50">
+      <section id="about" className="section-padding bg-gray-50/50">
         <div className="max-w-6xl mx-auto">
           <motion.div
             variants={staggerContainer}
@@ -259,12 +256,12 @@ function App() {
           >
             <motion.div variants={fadeInUp}>
               <h2 className="text-4xl font-bold mb-6 gradient-text">About Me</h2>
-              <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed font-light">
                 I'm a passionate React and React Native developer with a keen eye for design 
                 and user experience. I love creating applications that not only function 
                 perfectly but also delight users with their interface and interactions.
               </p>
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              <p className="text-gray-600 text-lg mb-8 leading-relaxed font-light">
                 With experience in modern JavaScript frameworks and mobile development, 
                 I bridge the gap between design and functionality to create seamless 
                 digital experiences.
@@ -272,7 +269,7 @@ function App() {
               <div className="flex gap-4">
                 <motion.a
                   href="#"
-                  className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -280,7 +277,7 @@ function App() {
                 </motion.a>
                 <motion.a
                   href="#"
-                  className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -288,7 +285,7 @@ function App() {
                 </motion.a>
                 <motion.a
                   href="#"
-                  className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -301,7 +298,7 @@ function App() {
               variants={fadeInUp}
               className="relative"
             >
-              <div className="w-full h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
+              <div className="w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center shadow-lg">
                 <div className="text-6xl text-gray-400">📸</div>
               </div>
             </motion.div>
@@ -320,7 +317,7 @@ function App() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-4 gradient-text">Skills & Expertise</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
               Technologies and tools I use to bring ideas to life
             </p>
           </motion.div>
@@ -336,15 +333,15 @@ function App() {
               <motion.div
                 key={skill.name}
                 variants={fadeInUp}
-                className="bg-white p-6 rounded-xl shadow-lg card-hover"
+                className="apple-glass p-6 rounded-xl shadow-lg card-hover"
               >
                 <div className="flex items-center mb-4">
-                  <skill.icon className="text-blue-600 mr-3" size={24} />
-                  <h3 className="text-xl font-semibold">{skill.name}</h3>
+                  <skill.icon className="text-gray-700 mr-3" size={24} />
+                  <h3 className="text-xl font-semibold text-gray-800">{skill.name}</h3>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <motion.div
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full"
+                    className="bg-gradient-to-r from-gray-600 to-gray-800 h-3 rounded-full"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
@@ -359,7 +356,7 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="section-padding bg-gray-50">
+      <section id="projects" className="section-padding bg-gray-50/50">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -369,7 +366,7 @@ function App() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-4 gradient-text">Featured Projects</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
               A showcase of my recent work and contributions
             </p>
           </motion.div>
@@ -385,19 +382,19 @@ function App() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="bg-white rounded-xl overflow-hidden shadow-lg card-hover"
+                className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
               >
-                <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                   <div className="text-4xl text-gray-400">🖼️</div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 font-light">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
+                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
                       >
                         {tech}
                       </span>
@@ -408,7 +405,7 @@ function App() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors duration-200"
+                      className="flex items-center gap-2 text-gray-800 hover:text-black transition-colors duration-200 font-medium"
                       whileHover={{ scale: 1.05 }}
                     >
                       <ExternalLink size={16} />
@@ -416,7 +413,7 @@ function App() {
                     </motion.a>
                     <motion.a
                       href={project.github}
-                      className="flex items-center gap-2 text-gray-600 hover:text-gray-700 transition-colors duration-200"
+                      className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 font-medium"
                       whileHover={{ scale: 1.05 }}
                     >
                       <Github size={16} />
@@ -440,12 +437,12 @@ function App() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Work Together</h2>
-            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto font-light">
               I'm always open to discussing new opportunities and interesting projects. 
               Let's create something amazing together!
             </p>
             <motion.button
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2 mx-auto"
+              className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2 mx-auto font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -457,9 +454,9 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gray-100 text-gray-600 py-8">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-gray-400">
+          <p className="font-light">
             © 2025 Milan Blaz. All rights reserved.
           </p>
         </div>
