@@ -675,25 +675,27 @@ function App() {
                 alt="Puna veličina"
                 className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               />
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200 bg-black/50 rounded-full p-2"
-              >
-                <X size={32} />
-              </button>
-              <motion.button
-                onClick={() => {
-                  const imageName = selectedImage.split('/').pop();
-                  downloadImage(imageName);
-                  setSelectedImage(null);
-                }}
-                className="absolute top-4 right-16 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Download size={16} />
-                Preuzmi
-              </motion.button>
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                <motion.button
+                  onClick={() => {
+                    const imageName = selectedImage.split('/').pop();
+                    downloadImage(imageName);
+                    setSelectedImage(null);
+                  }}
+                  className="bg-black bg-opacity-50 text-white p-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  title="Preuzmi sliku"
+                >
+                  <Download size={20} />
+                </motion.button>
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="text-white hover:text-gray-300 transition-colors duration-200 bg-black/50 rounded-full p-2"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -722,24 +724,25 @@ function App() {
                     <h3 className="text-lg font-semibold text-gray-800">{selectedPdf.name}</h3>
                     <p className="text-sm text-gray-600">{selectedPdf.description}</p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex items-center gap-3">
                     <motion.button
                       onClick={() => {
                         downloadFile(selectedPdf.filename, selectedPdf.name + '.pdf');
                         setSelectedPdf(null);
                       }}
-                      className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2"
+                      className="bg-black text-white p-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      title="Preuzmi PDF"
                     >
-                      <Download size={16} />
-                      Preuzmi
+                      <Download size={20} />
                     </motion.button>
                     <button
                       onClick={() => setSelectedPdf(null)}
-                      className="text-gray-500 hover:text-gray-700 transition-colors duration-200 p-2"
+                      className="text-gray-500 hover:text-gray-700 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100"
+                      title="Zatvori"
                     >
-                      <X size={24} />
+                      <X size={20} />
                     </button>
                   </div>
                 </div>
