@@ -564,15 +564,15 @@ function App() {
           </motion.div>
         </div>
         
-        {/* Scroll Down Arrow - Fixed centering */}
+        {/* Scroll Down Arrow - Perfectly centered */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full flex justify-center"
+          className="absolute bottom-8 inset-x-0 flex justify-center"
           animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-white/80 text-sm font-medium drop-shadow-lg">Skroluj dole</span>
-            <ChevronDown className="text-white/80 drop-shadow-lg" size={32} />
+            <span className="text-white/90 text-sm font-medium drop-shadow-lg">Skroluj dole</span>
+            <ChevronDown className="text-white/90 drop-shadow-lg" size={28} />
           </div>
         </motion.div>
       </section>
