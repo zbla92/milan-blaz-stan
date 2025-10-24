@@ -17,6 +17,8 @@ function App() {
   const [scrollY, setScrollY] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedPdf, setSelectedPdf] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentRoom, setCurrentRoom] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -178,6 +180,105 @@ function App() {
     link.click();
     document.body.removeChild(link);
   };
+
+  // Image navigation functions
+  const openImageModal = (roomId, imageIndex) => {
+    setCurrentRoom(roomId);
+    setCurrentImageIndex(imageIndex);
+    setSelectedImage(`/milan-blaz-stan/images/${rooms.find(room => room.id === roomId).images[imageIndex]}`);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+    setCurrentRoom(null);
+    setCurrentImageIndex(0);
+  };
+
+  const goToNextImage = () => {
+    if (currentRoom && rooms.find(room => room.id === currentRoom)) {
+      const room = rooms.find(room => room.id === currentRoom);
+      const nextIndex = (currentImageIndex + 1) % room.images.length;
+      setCurrentImageIndex(nextIndex);
+      setSelectedImage(`/milan-blaz-stan/images/${room.images[nextIndex]}`);
+    }
+  };
+
+  const goToPreviousImage = () => {
+    if (currentRoom && rooms.find(room => room.id === currentRoom)) {
+      const room = rooms.find(room => room.id === currentRoom);
+      const prevIndex = currentImageIndex === 0 ? room.images.length - 1 : currentImageIndex - 1;
+      setCurrentImageIndex(prevIndex);
+      setSelectedImage(`/milan-blaz-stan/images/${room.images[prevIndex]}`);
+    }
+  };
+
+  // Touch/Swipe handlers
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY
+    });
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distanceX = touchStart.x - touchEnd.x;
+    const distanceY = touchStart.y - touchEnd.y;
+    const isLeftSwipe = distanceX > minSwipeDistance;
+    const isRightSwipe = distanceX < -minSwipeDistance;
+    const isVerticalSwipe = Math.abs(distanceY) > Math.abs(distanceX);
+
+    if (!isVerticalSwipe) {
+      if (isLeftSwipe && selectedImage) {
+        goToNextImage();
+      } else if (isRightSwipe && selectedImage) {
+        goToPreviousImage();
+      }
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedImage) {
+        switch (e.key) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            goToPreviousImage();
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            goToNextImage();
+            break;
+          case 'Escape':
+            e.preventDefault();
+            closeImageModal();
+            break;
+          default:
+            break;
+        }
+      }
+    };
+
+    if (selectedImage) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [selectedImage, currentImageIndex, currentRoom]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -486,7 +587,7 @@ function App() {
                       className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
                       whileHover={{ scale: 1.02 }}
                     >
-                      <div className="relative group cursor-pointer" onClick={() => setSelectedImage(`/milan-blaz-stan/images/${imageName}`)}>
+                      <div className="relative group cursor-pointer" onClick={() => openImageModal(room.id, imgIndex)}>
                         <div className="relative overflow-hidden rounded-lg">
                           <img
                             src={`/milan-blaz-stan/images/${imageName}`}
@@ -729,16 +830,19 @@ function App() {
 
       {/* Image Modal */}
       <AnimatePresence>
-        {selectedImage && (
+        {selectedImage && currentRoom && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
+            onClick={closeImageModal}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
             <motion.div
-              className="relative max-w-5xl max-h-full"
+              className="relative max-w-7xl max-h-full w-full"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
@@ -747,14 +851,19 @@ function App() {
               <img
                 src={selectedImage}
                 alt="Puna veličina"
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl mx-auto"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
               />
+
+              {/* Navigation Controls */}
               <div className="absolute top-4 right-4 flex items-center gap-2">
                 <motion.button
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     const imageName = selectedImage.split('/').pop();
                     downloadImage(imageName);
-                    setSelectedImage(null);
                   }}
                   className="bg-black bg-opacity-50 text-white p-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
@@ -764,12 +873,55 @@ function App() {
                   <Download size={20} />
                 </motion.button>
                 <button
-                  onClick={() => setSelectedImage(null)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeImageModal();
+                  }}
                   className="text-white hover:text-gray-300 transition-colors duration-200 bg-black/50 rounded-full p-2"
+                  title="Zatvori"
                 >
                   <X size={20} />
                 </button>
               </div>
+
+              {/* Image Counter and Navigation */}
+              {(() => {
+                const room = rooms.find(room => room.id === currentRoom);
+                return room && room.images.length > 1 ? (
+                  <>
+                    <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-lg text-sm font-medium">
+                      {currentImageIndex + 1} / {room.images.length}
+                    </div>
+
+                    {/* Previous/Next Navigation */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToPreviousImage();
+                      }}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200"
+                      title="Prethodna slika"
+                    >
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToNextImage();
+                      }}
+                      className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200"
+                      title="Sledeća slika"
+                    >
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                ) : null;
+              })()}
             </motion.div>
           </motion.div>
         )}
