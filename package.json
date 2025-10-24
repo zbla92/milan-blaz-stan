@@ -1,9 +1,9 @@
 {
-  "name": "personal-website",
+  "name": "apartment-showcase",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://zbla92.github.io/milan-blaz",
+  "homepage": "https://zbla92.github.io/milan-blaz-stan",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

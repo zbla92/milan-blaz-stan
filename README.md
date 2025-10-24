@@ -64,7 +64,7 @@ npm install
 npm run dev
 ```
 
-4. Otvori browser i poseti `http://localhost:5173/`
+4. Otvori browser i poseti `http://localhost:3000/`
 
 ## 📁 Struktura Projekta
 
