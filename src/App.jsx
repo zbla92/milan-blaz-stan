@@ -262,37 +262,31 @@ function App() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Modern Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-          {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 opacity-20"
-               style={{
-                 backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
-                 backgroundSize: '20px 20px'
-               }}></div>
-        </div>
+        {/* Living Room Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/milan-blaz-stan/images/img-dnevna-6.jpg')`
+          }}
+        />
+        {/* Enhanced Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-slate-900/50 to-black/70"></div>
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-10"
+             style={{
+               backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)`,
+               backgroundSize: '30px 30px'
+             }}></div>
 
         {/* Enhanced Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-xl"
+            className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-blue-300/15 to-cyan-300/15 rounded-full blur-2xl"
             animate={{
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full blur-lg"
-            animate={{
-              y: [0, 25, 0],
-              x: [0, -20, 0],
-              scale: [1, 0.8, 1],
+              y: [0, -25, 0],
+              x: [0, 15, 0],
+              scale: [1, 1.05, 1],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
               duration: 8,
@@ -301,27 +295,43 @@ function App() {
             }}
           />
           <motion.div
-            className="absolute bottom-32 left-20 w-20 h-20 bg-gradient-to-br from-emerald-400/15 to-teal-400/15 rounded-full blur-lg"
+            className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-br from-purple-300/12 to-pink-300/12 rounded-full blur-xl"
             animate={{
-              y: [0, -20, 0],
-              x: [0, 30, 0],
-              scale: [1, 1.2, 1],
+              y: [0, 30, 0],
+              x: [0, -18, 0],
+              scale: [1, 0.9, 1],
+              opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: 7,
+              duration: 10,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
           <motion.div
-            className="absolute bottom-40 right-32 w-16 h-16 bg-gradient-to-br from-amber-400/10 to-orange-400/10 rounded-full blur-md"
+            className="absolute bottom-32 left-20 w-28 h-28 bg-gradient-to-br from-emerald-300/12 to-teal-300/12 rounded-full blur-xl"
             animate={{
-              y: [0, -15, 0],
-              x: [0, -25, 0],
-              scale: [1, 0.9, 1],
+              y: [0, -25, 0],
+              x: [0, 25, 0],
+              scale: [1, 1.1, 1],
+              opacity: [0.25, 0.4, 0.25],
             }}
             transition={{
-              duration: 5,
+              duration: 9,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-40 right-32 w-20 h-20 bg-gradient-to-br from-amber-300/8 to-orange-300/8 rounded-full blur-lg"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, -20, 0],
+              scale: [1, 0.8, 1],
+              opacity: [0.15, 0.3, 0.15],
+            }}
+            transition={{
+              duration: 7,
               repeat: Infinity,
               ease: "easeInOut"
             }}
@@ -349,13 +359,13 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent drop-shadow-lg">
+            <span className="bg-gradient-to-r from-white via-blue-50 to-white bg-clip-text text-transparent drop-shadow-2xl">
               Dizajn Stana
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-3xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-xl md:text-3xl text-white mb-12 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -396,8 +406,8 @@ function App() {
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-white/60 text-sm font-light">Skroluj dole</span>
-            <ChevronDown className="text-white/60" size={28} />
+            <span className="text-white/70 text-sm font-light drop-shadow-md">Skroluj dole</span>
+            <ChevronDown className="text-white/70 drop-shadow-md" size={28} />
           </div>
         </motion.div>
       </section>
