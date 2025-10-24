@@ -373,46 +373,64 @@ function App() {
         {/* Enhanced Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-slate-900/40 to-black/60"></div>
 
-        {/* Enhanced Rainbow Floating Elements */}
+        {/* Subtle Rainbow Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
+          {/* Top row */}
           <motion.div
-            className="absolute top-20 left-10 w-48 h-48 bg-gradient-to-br from-blue-400/25 via-cyan-400/20 to-blue-500/25 rounded-full blur-3xl"
+            className="absolute top-16 left-8 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-cyan-400/15 rounded-full blur-xl"
             animate={{
-              y: [0, -40, 0],
-              x: [0, 25, 0],
-              scale: [1, 1.2, 1],
-              opacity: [0.4, 0.8, 0.4],
-              rotate: [0, 180, 360],
+              y: [0, -15, 0],
+              x: [0, 10, 0],
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.6, 0.3],
+              rotate: [0, 90, 180],
             }}
             transition={{
-              duration: 12,
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
           <motion.div
-            className="absolute top-40 right-20 w-40 h-40 bg-gradient-to-br from-purple-400/20 via-pink-400/15 to-purple-500/20 rounded-full blur-2xl"
+            className="absolute top-20 right-12 w-16 h-16 bg-gradient-to-br from-purple-400/18 to-pink-400/12 rounded-full blur-lg"
             animate={{
-              y: [0, 35, 0],
-              x: [0, -30, 0],
-              scale: [1, 0.8, 1],
-              opacity: [0.3, 0.7, 0.3],
+              y: [0, 20, 0],
+              x: [0, -12, 0],
+              scale: [1, 0.9, 1],
+              opacity: [0.25, 0.5, 0.25],
               rotate: [0, -120, -240],
             }}
             transition={{
-              duration: 15,
+              duration: 10,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
           <motion.div
-            className="absolute bottom-32 left-20 w-36 h-36 bg-gradient-to-br from-emerald-400/18 via-teal-400/12 to-emerald-500/18 rounded-full blur-2xl"
+            className="absolute top-32 left-1/3 w-14 h-14 bg-gradient-to-br from-emerald-400/15 to-teal-400/10 rounded-full blur-md"
             animate={{
-              y: [0, -30, 0],
-              x: [0, 35, 0],
-              scale: [1, 1.3, 1],
-              opacity: [0.35, 0.6, 0.35],
-              rotate: [0, 90, 180],
+              y: [0, -18, 0],
+              x: [0, 15, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.4, 0.2],
+              rotate: [0, 60, 120],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Middle row */}
+          <motion.div
+            className="absolute top-1/2 left-6 w-18 h-18 bg-gradient-to-br from-amber-400/12 to-orange-400/8 rounded-full blur-lg"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 18, 0],
+              scale: [1, 0.8, 1],
+              opacity: [0.2, 0.45, 0.2],
+              rotate: [0, -90, -180],
             }}
             transition={{
               duration: 11,
@@ -421,28 +439,13 @@ function App() {
             }}
           />
           <motion.div
-            className="absolute bottom-40 right-32 w-28 h-28 bg-gradient-to-br from-amber-400/15 via-orange-400/10 to-amber-500/15 rounded-full blur-xl"
+            className="absolute top-1/2 right-8 w-22 h-22 bg-gradient-to-br from-rose-400/10 to-red-400/6 rounded-full blur-xl"
             animate={{
-              y: [0, -25, 0],
-              x: [0, -25, 0],
-              scale: [1, 0.7, 1],
-              opacity: [0.25, 0.5, 0.25],
-              rotate: [0, -60, -120],
-            }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-60 left-1/4 w-24 h-24 bg-gradient-to-br from-rose-400/12 via-red-400/8 to-rose-500/12 rounded-full blur-lg"
-            animate={{
-              y: [0, 20, 0],
-              x: [0, 40, 0],
-              scale: [1, 1.4, 1],
-              opacity: [0.2, 0.4, 0.2],
-              rotate: [0, 150, 300],
+              y: [0, 25, 0],
+              x: [0, -15, 0],
+              scale: [1, 1.3, 1],
+              opacity: [0.15, 0.35, 0.15],
+              rotate: [0, 120, 240],
             }}
             transition={{
               duration: 13,
@@ -450,14 +453,46 @@ function App() {
               ease: "easeInOut"
             }}
           />
+
+          {/* Bottom row */}
           <motion.div
-            className="absolute bottom-60 right-1/4 w-32 h-32 bg-gradient-to-br from-violet-400/15 via-indigo-400/10 to-violet-500/15 rounded-full blur-xl"
+            className="absolute bottom-40 left-12 w-16 h-16 bg-gradient-to-br from-violet-400/12 to-indigo-400/8 rounded-full blur-md"
             animate={{
-              y: [0, -35, 0],
+              y: [0, -22, 0],
               x: [0, 20, 0],
               scale: [1, 0.9, 1],
-              opacity: [0.3, 0.6, 0.3],
-              rotate: [0, -90, -180],
+              opacity: [0.25, 0.5, 0.25],
+              rotate: [0, -60, -120],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-32 right-16 w-12 h-12 bg-gradient-to-br from-teal-400/10 to-cyan-400/6 rounded-full blur-sm"
+            animate={{
+              y: [0, -15, 0],
+              x: [0, 25, 0],
+              scale: [1, 1.4, 1],
+              opacity: [0.2, 0.4, 0.2],
+              rotate: [0, 90, 180],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-48 left-1/4 w-10 h-10 bg-gradient-to-br from-pink-400/8 to-purple-400/5 rounded-full blur-sm"
+            animate={{
+              y: [0, 18, 0],
+              x: [0, -20, 0],
+              scale: [1, 1.5, 1],
+              opacity: [0.15, 0.3, 0.15],
+              rotate: [0, 150, 300],
             }}
             transition={{
               duration: 14,
@@ -529,8 +564,9 @@ function App() {
           </motion.div>
         </div>
         
+        {/* Scroll Down Arrow - Fixed centering */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full flex justify-center"
           animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
