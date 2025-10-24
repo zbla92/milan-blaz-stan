@@ -1,63 +1,93 @@
-# Milan Blaz - Personal Portfolio Website
+# Dizajn Stana - Milan Blaz
 
-A modern, responsive portfolio website built with React, Vite, Tailwind CSS, and Framer Motion.
-**Live Demo**: [https://zbla92.github.io/milan-blaz](https://zbla92.github.io/milan-blaz)
+Moderni, profesionalni veb-sajt za prikaz dizajna stana namenjen kompanijama za izradu ponuda.
+**Live Demo**: [https://zbla92.github.io/milan-blaz-stan](https://zbla92.github.io/milan-blaz-stan)
 
-## ✨ Features
+## ✨ Funkcionalnosti
 
-- **Modern Design**: Clean and professional design with smooth animations
-- **Responsive**: Fully responsive design that works on all devices
-- **Smooth Animations**: Beautiful animations powered by Framer Motion
-- **Interactive Elements**: Hover effects and micro-interactions
-- **Fast Performance**: Built with Vite for optimal performance
-- **SEO Friendly**: Optimized for search engines
-- **GitHub Pages Ready**: Automatic deployment to GitHub Pages
+- **Prostrane Galerije**: Detaljni prikazi svih prostorija sa fotografijama
+- **Tehnička Dokumentacija**: Svi potrebni PDF dokumenti za izradu ponuda
+- **Preuzimanje Materijala**: Mogućnost preuzimanja slika i dokumenata
+- **Responsive Dizajn**: Potpuno prilagođen za sve uređaje
+- **Smooth Animations**: Prelepe animacije korišćenjem Framer Motion
+- **Brze Performanse**: Izgrađeno sa Vite za optimalne performanse
+- **SEO Optimizacija**: Optimizovano za pretraživače
+- **GitHub Pages**: Automatsko deploy-ovanje na GitHub Pages
 
-## 🛠️ Tech Stack
+## 🏠 Prostorije
 
-- **React 19** - Modern React with hooks
-- **Vite** - Fast build tool and dev server
+- **Dečija Soba** (8 fotografija)
+- **Dnevna Soba** (9 fotografija)
+- **Kuhinja** (2 fotografije)
+- **Sobe** (4 fotografije)
+- **Hodnik** (3 fotografije)
+- **Kupatilo (WC)** (8 fotografija)
+
+## 📋 Tehnička Dokumentacija
+
+- Glavna osnova sa nameštajem
+- Električne instalacije (2 dela)
+- Podne obloge (parket)
+- Kupatilo - gipsane ploče (2 dela)
+- Spušteni stropovi
+
+## 🛠️ Tehnologije
+
+- **React 19** - Moderni React sa hooks
+- **Vite** - Brzi build tool i dev server
 - **Tailwind CSS** - Utility-first CSS framework
 - **Framer Motion** - Production-ready motion library
-- **Lucide React** - Beautiful icons
-- **GitHub Pages** - Free hosting
+- **Lucide React** - Prelepe ikone
+- **GitHub Pages** - Besplatan hosting
 
-## 🚀 Quick Start
+## 🚀 Brzi Start
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+### Preduslovi
+- Node.js 18+
+- npm ili yarn
 
-### Installation
+### Instalacija
 
-1. Clone the repository:
+1. Kloniraj repozitorijum:
 ```bash
-git clone https://github.com/zbla92/milan-blaz.git
-cd milan-blaz
+git clone git@github.com:zbla92/milan-blaz-stan.git
+cd milan-blaz-stan
 ```
 
-2. Install dependencies:
+2. Instaliraj dependencies:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+3. Pokreni development server:
 ```bash
 npm run dev
 ```
 
-4. Open your browser and visit `http://localhost:5173/milan-blaz/`
+4. Otvori browser i poseti `http://localhost:5173/`
 
-## 📁 Project Structure
+## 📁 Struktura Projekta
 
 ```
-personal-website/
+stan-showcase/
 ├── public/
-│   ├── Milan-Blaz-CV.pdf      # Downloadable CV
+│   ├── images/                # Galerije slika prostorija
+│   │   ├── img-djecija-soba-*.jpg
+│   │   ├── img-dnevna-*.jpg
+│   │   ├── img-kuhinja-*.jpg
+│   │   ├── img-soba-*.jpg
+│   │   ├── img-hodnik-*.jpg
+│   │   └── img-wc-*.jpg
+│   ├── documents/             # PDF dokumentacija
+│   │   ├── glavna-osnova-sa-namjestajem.pdf
+│   │   ├── struja-*.pdf
+│   │   ├── parket.pdf
+│   │   ├── kupatilo-rigips*.pdf
+│   │   └── spusteni-strop.pdf
 │   └── vite.svg
 ├── src/
-│   ├── assets/
-│   ├── App.jsx                # Main component
+│   ├── App.jsx                # Glavna komponenta
+│   ├── App.css                # Dodatne stilove
 │   ├── index.css             # Tailwind CSS + custom styles
 │   └── main.jsx              # Entry point
 ├── .github/
@@ -66,102 +96,76 @@ personal-website/
 └── package.json
 ```
 
-## 🎨 Features Overview
+## 🎨 Funkcionalnosti
 
-### Hero Section
-- Animated entrance with Framer Motion
-- Gradient text effects
-- Professional avatar placeholder
-- Call-to-action buttons
+### Hero Sekcija
+- Animirani ulaz sa Framer Motion
+- Gradient tekst efekti
+- Profesionalni avatar
+- Call-to-action dugmad
 
-### About Section
-- Professional description
-- Social media links
-- Animated profile image placeholder
+### Sekcija Prostorija
+- Galerije slika za svaku prostoriju
+- Modal za pregled punih slika
+- Mogućnost preuzimanja slika
+- Hover efekti i animacije
 
-### Skills Section
-- Animated skill bars
-- Technology icons
-- Professional competencies
+### Sekcija Dokumentacije
+- Pregled PDF dokumenata
+- Mogućnost preuzimanja
+- Otvaranje u novom tabu
+- Opis svakog dokumenta
 
-### Projects Section
-- Featured project showcases
-- Live demo and code links
-- Technology stack tags
-- Vivant Design project included
-
-### Contact Section
-- Professional call-to-action
-- Smooth scroll navigation
+### Kontakt Sekcija
+- Kontakt informacije
+- Linkovi za poziv i email
+- Profesionalni dizajn
 
 ## 🚀 Deployment
 
-The website is automatically deployed to GitHub Pages using GitHub Actions when you push to the main branch.
+Website se automatski deploy-uje na GitHub Pages kada se push-uje na main branch.
 
 ### Manual Deployment
 
-If you prefer to deploy manually:
+Ako preferirate manuelni deployment:
 
 ```bash
 npm run build
 npm run deploy
 ```
 
-## 🎯 Customization
+## 🎯 Kontakt Informacije
 
-### Adding Projects
-Edit the `projects` array in `src/App.jsx`:
+**Milan Blaz** - Vlasnik stana
 
-```javascript
-const projects = [
-  {
-    title: 'Your Project',
-    description: 'Project description',
-    tech: ['React', 'Node.js'],
-    link: 'https://your-demo.com',
-    github: 'https://github.com/your-repo',
-    image: '/project-image.jpg'
-  }
-];
-```
+- **Telefon**: [+381 66 612 493](tel:+38166612493)
+- **Email**: [milanblaz@live.com](mailto:milanblaz@live.com)
 
-### Updating Skills
-Modify the `skills` array in `src/App.jsx`:
+## 📱 Responsive Dizajn
 
-```javascript
-const skills = [
-  { name: 'Technology', level: 90, icon: IconComponent }
-];
-```
-
-### Changing Colors
-Update the color scheme in `tailwind.config.js` and `src/index.css`.
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
+Website je potpuno responsive i optimizovan za:
 - Desktop (1200px+)
-- Tablet (768px - 1199px)  
+- Tablet (768px - 1199px)
 - Mobile (320px - 767px)
 
-## ⚡ Performance
+## ⚡ Performanse
 
-- Optimized bundle size with Vite
-- Lazy-loaded animations
-- Optimized images and assets
-- Fast loading times
+- Optimizovana veličina bundle-a sa Vite
+- Lazy-loaded animacije
+- Optimizovane slike
+- Brzo učitavanje
 
-## 📧 Contact
+## 📋 Korišćenje
 
-Milan Blaz - React & React Native Developer
+1. **Pregled Prostorija**: Kliknite na "Pregledaj Prostorije" da vidite sve sobe
+2. **Preuzimanje Slika**: Kliknite na download ikonu pored svake slike
+3. **Pregled Dokumenata**: Idite na "Dokumentacija" sekciju
+4. **Kontakt**: Koristite "Pošaljite Ponudu" dugme za direktan kontakt
 
-- Website: [https://zbla92.github.io/milan-blaz](https://zbla92.github.io/milan-blaz)
-- GitHub: [@zbla92](https://github.com/zbla92)
+## 📄 Licenca
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
+Ovaj projekat je namenjen isključivo za izradu ponuda za renoviranje stana.
 
 ---
 
-Built with ❤️ by Milan Blaz
+Izgrađeno sa ❤️ od Milan Blaz

@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink,
-  Code,
-  Smartphone,
-  Globe,
+import { motion, AnimatePresence } from 'framer-motion';
+import {
   Download,
   ChevronDown,
   Menu,
-  X
+  X,
+  Phone,
+  Mail,
+  Home,
+  Eye,
+  FileText
 } from 'lucide-react';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -38,44 +37,151 @@ function App() {
     }
   };
 
-  const projects = [
+  const rooms = [
     {
-      title: 'Vivant Design',
-      description: 'Modern e-commerce platform with sleek design and smooth user experience',
-      tech: ['React', 'Next.js', 'Tailwind CSS'],
-      link: 'https://www.fedya.co/vivant',
-      github: '#',
-      image: '/project1.jpg'
+      id: 'djecija-soba',
+      name: 'Dečija Soba',
+      nameEn: 'Children\'s Room',
+      images: [
+        'img-djecija-soba-1.jpg',
+        'img-djecija-soba-2.jpg',
+        'img-djecija-soba-3.jpg',
+        'img-djecija-soba-4.jpg',
+        'img-djecija-soba-5.jpg',
+        'img-djecija-soba-6.jpg',
+        'img-djecija-soba-7.jpg',
+        'img-djecija-soba-8.jpg'
+      ],
+      description: 'Dečija soba sa modernim dizajnom i funkcionalnim prostorom'
     },
     {
-      title: 'React Native App',
-      description: 'Cross-platform mobile application with native performance',
-      tech: ['React Native', 'TypeScript', 'Redux'],
-      link: '#',
-      github: '#',
-      image: '/project2.jpg'
+      id: 'dnevna',
+      name: 'Dnevna Soba',
+      nameEn: 'Living Room',
+      images: [
+        'img-dnevna-1.jpg',
+        'img-dnevna-2.jpg',
+        'img-dnevna-3.jpg',
+        'img-dnevna-4.jpg',
+        'img-dnevna-5.jpg',
+        'img-dnevna-6.jpg',
+        'img-dnevna-7.jpg',
+        'img-dnevna-8.jpg',
+        'img-dnevna-9.jpg'
+      ],
+      description: 'Prostrana dnevna soba sa savremenim elementima'
     },
     {
-      title: 'Portfolio Website',
-      description: 'Responsive portfolio website with modern animations',
-      tech: ['React', 'Framer Motion', 'Tailwind CSS'],
-      link: '#',
-      github: '#',
-      image: '/project3.jpg'
+      id: 'kuhinja',
+      name: 'Kuhinja',
+      nameEn: 'Kitchen',
+      images: [
+        'img-kuhinja-1.jpg',
+        'img-kuhinja-2.jpg'
+      ],
+      description: 'Moderna kuhinja sa praktičnim rasporedom'
+    },
+    {
+      id: 'sobe',
+      name: 'Sobe',
+      nameEn: 'Bedrooms',
+      images: [
+        'img-soba-1.jpg',
+        'img-soba-2.jpg',
+        'img-soba-3.jpg',
+        'img-soba-4.jpg'
+      ],
+      description: 'Komforne spavaće sobe sa prijatnom atmosferom'
+    },
+    {
+      id: 'hodnik',
+      name: 'Hodnik',
+      nameEn: 'Hallway',
+      images: [
+        'img-hodnik-1.jpg',
+        'img-hodnik-2.jpg',
+        'img-hodnik-3.jpg'
+      ],
+      description: 'Funkcionalan hodnik sa pametnim skladištenjem'
+    },
+    {
+      id: 'kupatilo',
+      name: 'Kupatilo (WC)',
+      nameEn: 'Bathroom',
+      images: [
+        'img-wc-1.jpg',
+        'img-wc-2.jpg',
+        'img-wc-3.jpg',
+        'img-wc-4.jpg',
+        'img-wc-5.jpg',
+        'img-wc-6.jpg',
+        'img-wc-7.jpg',
+        'img-wc.jpg'
+      ],
+      description: 'Moderno kupatilo sa kvalitetnim materijalima'
     }
   ];
 
-  const skills = [
-    { name: 'React', level: 95, icon: Code },
-    { name: 'React Native', level: 90, icon: Smartphone },
-    { name: 'JavaScript/TypeScript', level: 92, icon: Code },
-    { name: 'Web Development', level: 88, icon: Globe }
+  const documents = [
+    {
+      name: 'Glavna osnova sa nameštajem',
+      filename: 'glavna-osnova-sa-namjestajem.pdf',
+      description: 'Glavni plan stana sa rasporedom nameštaja'
+    },
+    {
+      name: 'Električne instalacije 1',
+      filename: 'struja-1.pdf',
+      description: 'Plan električnih instalacija - deo 1'
+    },
+    {
+      name: 'Električne instalacije 2',
+      filename: 'struja-2.pdf',
+      description: 'Plan električnih instalacija - deo 2'
+    },
+    {
+      name: 'Podne obloge (parket)',
+      filename: 'parket.pdf',
+      description: 'Specifikacija podnih obloga i parketa'
+    },
+    {
+      name: 'Kupatilo - gipsane ploče 1',
+      filename: 'kupatilo-rigips.pdf',
+      description: 'Plan gipsanih ploča u kupatilu'
+    },
+    {
+      name: 'Kupatilo - gipsane ploče 2',
+      filename: 'kupatilo-rigips-2.pdf',
+      description: 'Plan gipsanih ploča u kupatilu - deo 2'
+    },
+    {
+      name: 'Spušteni stropovi',
+      filename: 'spusteni-strop.pdf',
+      description: 'Plan spuštenih stropova i rasvete'
+    }
   ];
+
+  const downloadFile = (filename, displayName) => {
+    const link = document.createElement('a');
+    link.href = `/documents/${filename}`;
+    link.download = displayName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadImage = (imageName) => {
+    const link = document.createElement('a');
+    link.href = `/images/${imageName}`;
+    link.download = imageName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <motion.nav 
+      <motion.nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrollY > 50 ? 'apple-glass shadow-lg shadow-gray-200/20' : 'bg-transparent'
         }`}
@@ -85,23 +191,28 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <motion.div 
+            <motion.div
               className="text-2xl font-bold gradient-text"
               whileHover={{ scale: 1.05 }}
             >
-              Milan Blaz
+              <Home className="inline-block mr-2" size={28} />
+              Stan Dizajn
             </motion.div>
-            
+
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+              {[
+                { name: 'Prostorije', href: '#prostorije' },
+                { name: 'Dokumentacija', href: '#dokumentacija' },
+                { name: 'Kontakt', href: '#kontakt' }
+              ].map((item) => (
                 <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.name}
+                  href={item.href}
                   className="text-gray-800 hover:text-black transition-colors duration-200 font-medium"
                   whileHover={{ y: -2 }}
                 >
-                  {item}
+                  {item.name}
                 </motion.a>
               ))}
             </div>
@@ -119,33 +230,39 @@ function App() {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <motion.div
-            className="md:hidden apple-glass border-t border-gray-200/50"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <div className="px-4 py-4 space-y-4">
-              {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="block text-gray-800 hover:text-black transition-colors duration-200 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className="md:hidden apple-glass border-t border-gray-200/50"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <div className="px-4 py-4 space-y-4">
+                {[
+                  { name: 'Prostorije', href: '#prostorije' },
+                  { name: 'Dokumentacija', href: '#dokumentacija' },
+                  { name: 'Kontakt', href: '#kontakt' }
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="block text-gray-800 hover:text-black transition-colors duration-200 font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 apple-gradient"></div>
-        
+
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -185,7 +302,7 @@ function App() {
             }}
           />
         </div>
-        
+
         <div className="relative z-10 text-center px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -194,47 +311,50 @@ function App() {
             className="mb-8"
           >
             <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 text-4xl font-bold shadow-lg">
-              MB
+              <Home size={48} />
             </div>
           </motion.div>
-          
+
           <motion.h1
             className="text-5xl md:text-7xl font-bold mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="gradient-text">Milan Blaz</span>
+            <span className="gradient-text">Dizajn Stana</span>
           </motion.h1>
-          
+
           <motion.p
             className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            React & React Native Developer crafting beautiful digital experiences
+            Kompletna dokumentacija i vizuali dizajna stana za izradu ponuda
           </motion.p>
-          
+
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium">
-              <Download size={20} />
-              Download CV
+            <button
+              onClick={() => document.getElementById('prostorije').scrollIntoView({ behavior: 'smooth' })}
+              className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium"
+            >
+              <Eye size={20} />
+              Pregledaj Prostorije
             </button>
-            <button 
-              onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+            <button
+              onClick={() => document.getElementById('dokumentacija').scrollIntoView({ behavior: 'smooth' })}
               className="border-2 border-black text-black px-8 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-200 font-medium"
             >
-              View Projects
+              Dokumentacija
             </button>
           </motion.div>
         </div>
-        
+
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
@@ -244,71 +364,9 @@ function App() {
         </motion.div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="section-padding bg-gray-50/50">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-12 items-center"
-          >
-            <motion.div variants={fadeInUp}>
-              <h2 className="text-4xl font-bold mb-6 gradient-text">About Me</h2>
-              <p className="text-gray-600 text-lg mb-6 leading-relaxed font-light">
-                I'm a passionate React and React Native developer with a keen eye for design 
-                and user experience. I love creating applications that not only function 
-                perfectly but also delight users with their interface and interactions.
-              </p>
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed font-light">
-                With experience in modern JavaScript frameworks and mobile development, 
-                I bridge the gap between design and functionality to create seamless 
-                digital experiences.
-              </p>
-              <div className="flex gap-4">
-                <motion.a
-                  href="#"
-                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Github size={28} />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Linkedin size={28} />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Mail size={28} />
-                </motion.a>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              variants={fadeInUp}
-              className="relative"
-            >
-              <div className="w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center shadow-lg">
-                <div className="text-6xl text-gray-400">📸</div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="section-padding">
-        <div className="max-w-6xl mx-auto">
+      {/* Room Sections */}
+      <section id="prostorije" className="section-padding">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -316,9 +374,9 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Skills & Expertise</h2>
+            <h2 className="text-4xl font-bold mb-4 gradient-text">Prostorije Stana</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
-              Technologies and tools I use to bring ideas to life
+              Detaljni prikazi svih prostorija sa fotografijama i opisima
             </p>
           </motion.div>
 
@@ -327,36 +385,76 @@ function App() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8"
           >
-            {skills.map((skill, index) => (
+            {rooms.map((room) => (
               <motion.div
-                key={skill.name}
+                key={room.id}
                 variants={fadeInUp}
-                className="apple-glass p-6 rounded-xl shadow-lg card-hover"
+                className="mb-16"
               >
-                <div className="flex items-center mb-4">
-                  <skill.icon className="text-gray-700 mr-3" size={24} />
-                  <h3 className="text-xl font-semibold text-gray-800">{skill.name}</h3>
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-bold mb-2 text-gray-800">{room.name}</h3>
+                  <p className="text-gray-600 font-light">{room.description}</p>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
-                  <motion.div
-                    className="bg-gradient-to-r from-gray-600 to-gray-800 h-3 rounded-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                  />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {room.images.map((imageName, imgIndex) => (
+                    <motion.div
+                      key={imgIndex}
+                      className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="relative group">
+                        <img
+                          src={`/images/${imageName}`}
+                          alt={`${room.name} - slika ${imgIndex + 1}`}
+                          className="w-full h-64 object-cover cursor-pointer"
+                          onClick={() => setSelectedImage(`/images/${imageName}`)}
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <Eye className="text-white" size={32} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-500 font-medium">
+                            {imageName.replace('img-', '').replace('.jpg', '').replace('-', ' ').toUpperCase()}
+                          </span>
+                          <div className="flex gap-2">
+                            <motion.button
+                              onClick={() => downloadImage(imageName)}
+                              className="p-2 text-gray-500 hover:text-gray-800 transition-colors duration-200"
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                              title="Preuzmi sliku"
+                            >
+                              <Download size={16} />
+                            </motion.button>
+                            <motion.button
+                              onClick={() => setSelectedImage(`/images/${imageName}`)}
+                              className="p-2 text-gray-500 hover:text-gray-800 transition-colors duration-200"
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                              title="Pogledaj u punoj veličini"
+                            >
+                              <Eye size={16} />
+                            </motion.button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-                <p className="text-right text-sm text-gray-500 mt-2">{skill.level}%</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="section-padding bg-gray-50/50">
+      {/* Documentation Section */}
+      <section id="dokumentacija" className="section-padding bg-gray-50/50">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -365,9 +463,9 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Featured Projects</h2>
+            <h2 className="text-4xl font-bold mb-4 gradient-text">Tehnička Dokumentacija</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
-              A showcase of my recent work and contributions
+              Svi potrebni planovi i specifikacije za izradu ponuda
             </p>
           </motion.div>
 
@@ -376,59 +474,78 @@ function App() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {projects.map((project, index) => (
+            {documents.map((doc, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
+                className="apple-glass p-6 rounded-xl shadow-lg card-hover"
               >
-                <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <div className="text-4xl text-gray-400">🖼️</div>
+                <div className="flex items-start mb-4">
+                  <FileText className="text-gray-700 mr-3 flex-shrink-0" size={24} />
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{doc.name}</h3>
+                    <p className="text-gray-600 text-sm font-light mb-4">{doc.description}</p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 font-light">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4">
-                    <motion.a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-800 hover:text-black transition-colors duration-200 font-medium"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <ExternalLink size={16} />
-                      Live Demo
-                    </motion.a>
-                    <motion.a
-                      href={project.github}
-                      className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-200 font-medium"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <Github size={16} />
-                      Code
-                    </motion.a>
-                  </div>
+                <div className="flex gap-2">
+                  <motion.button
+                    onClick={() => downloadFile(doc.filename, doc.name + '.pdf')}
+                    className="flex-1 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Download size={16} />
+                    Preuzmi PDF
+                  </motion.button>
+                  <motion.a
+                    href={`/documents/${doc.filename}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Pregledaj PDF"
+                  >
+                    <Eye size={16} />
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="apple-glass p-6 rounded-xl max-w-2xl mx-auto">
+              <h3 className="text-xl font-semibold mb-4 text-gray-800">Svi materijali za preuzimanje</h3>
+              <p className="text-gray-600 mb-6 font-light">
+                Preuzmite kompletan paket sa svim slikama i dokumentima u jednom zip fajlu
+              </p>
+              <motion.button
+                onClick={() => {
+                  // For now, show contact information for complete package
+                  alert('Kontaktirajte nas za kompletan paket materijala:\nEmail: milanblaz@live.com\nTelefon: 066 612 493');
+                }}
+                className="bg-gradient-to-r from-gray-800 to-gray-900 text-white px-8 py-3 rounded-full hover:from-gray-900 hover:to-black transition-all duration-200 flex items-center gap-2 mx-auto font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Download size={20} />
+                Preuzmi kompletan paket
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="section-padding">
+      <section id="kontakt" className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -436,18 +553,70 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-6 gradient-text">Let's Work Together</h2>
+            <h2 className="text-4xl font-bold mb-6 gradient-text">Kontakt Informacije</h2>
             <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto font-light">
-              I'm always open to discussing new opportunities and interesting projects. 
-              Let's create something amazing together!
+              Za izradu ponuda i dodatne informacije, kontaktirajte nas
             </p>
+
+            <div className="apple-glass p-8 rounded-2xl mb-8">
+              <div className="grid md:grid-cols-3 gap-6">
+                <motion.div
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-2xl font-bold text-gray-700">MB</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Milan Blaz</h3>
+                  <p className="text-gray-600 font-light">Vlasnik</p>
+                </motion.div>
+
+                <motion.div
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mb-4">
+                    <Phone className="text-gray-700" size={24} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Telefon</h3>
+                  <a
+                    href="tel:+38166612493"
+                    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 font-light"
+                  >
+                    066 612 493
+                  </a>
+                </motion.div>
+
+                <motion.div
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mb-4">
+                    <Mail className="text-gray-700" size={24} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Email</h3>
+                  <a
+                    href="mailto:milanblaz@live.com"
+                    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 font-light"
+                  >
+                    milanblaz@live.com
+                  </a>
+                </motion.div>
+              </div>
+            </div>
+
             <motion.button
+              onClick={() => {
+                const subject = encodeURIComponent('Ponuda za renoviranje stana');
+                const body = encodeURIComponent('Poštovani,\n\nZanima me ponuda za renoviranje stana prema priloženoj dokumentaciji.\n\nSrdačan pozdrav');
+                window.open(`mailto:milanblaz@live.com?subject=${subject}&body=${body}`);
+              }}
               className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2 mx-auto font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Mail size={20} />
-              Get In Touch
+              Pošaljite Ponudu
             </motion.button>
           </motion.div>
         </div>
@@ -456,11 +625,57 @@ function App() {
       {/* Footer */}
       <footer className="bg-gray-100 text-gray-600 py-8">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="font-light">
-            © 2025 Milan Blaz. All rights reserved.
+          <p className="font-light mb-2">
+            © 2025 Milan Blaz - Dizajn Stana
+          </p>
+          <p className="text-sm font-light text-gray-500">
+            Sva prava zadržana. Sadržaj ove stranice je namenjen isključivo za izradu ponuda.
           </p>
         </div>
       </footer>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <motion.div
+            className="relative max-w-4xl max-h-full"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.8 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Puna veličina"
+              className="max-w-full max-h-full object-contain rounded-lg"
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200"
+            >
+              <X size={32} />
+            </button>
+            <motion.button
+              onClick={() => {
+                downloadImage(selectedImage.split('/').pop());
+                setSelectedImage(null);
+              }}
+              className="absolute top-4 right-16 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download size={16} />
+              Preuzmi
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
