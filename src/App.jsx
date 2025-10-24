@@ -162,7 +162,7 @@ function App() {
 
   const downloadFile = (filename, displayName) => {
     const link = document.createElement('a');
-    link.href = `/documents/${filename}`;
+    link.href = `/milan-blaz-stan/documents/${filename}`;
     link.download = displayName;
     document.body.appendChild(link);
     link.click();
@@ -171,7 +171,7 @@ function App() {
 
   const downloadImage = (imageName) => {
     const link = document.createElement('a');
-    link.href = `/images/${imageName}`;
+    link.href = `/milan-blaz-stan/images/${imageName}`;
     link.download = imageName;
     document.body.appendChild(link);
     link.click();
@@ -406,10 +406,10 @@ function App() {
                     >
                       <div className="relative group">
                         <img
-                          src={`/images/${imageName}`}
+                          src={`/milan-blaz-stan/images/${imageName}`}
                           alt={`${room.name} - slika ${imgIndex + 1}`}
                           className="w-full h-64 object-cover cursor-pointer"
-                          onClick={() => setSelectedImage(`/images/${imageName}`)}
+                          onClick={() => setSelectedImage(`/milan-blaz-stan/images/${imageName}`)}
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -500,7 +500,7 @@ function App() {
                     Preuzmi PDF
                   </motion.button>
                   <motion.a
-                    href={`/documents/${doc.filename}`}
+                    href={`/milan-blaz-stan/documents/${doc.filename}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center"
@@ -663,7 +663,8 @@ function App() {
             </button>
             <motion.button
               onClick={() => {
-                downloadImage(selectedImage.split('/').pop());
+                const imageName = selectedImage.split('/').pop();
+                downloadImage(imageName);
                 setSelectedImage(null);
               }}
               className="absolute top-4 right-16 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center gap-2"
