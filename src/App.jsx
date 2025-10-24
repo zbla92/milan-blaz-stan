@@ -261,7 +261,14 @@ function App() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 apple-gradient"></div>
+        {/* Background Image with Gradient Overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/milan-blaz-stan/images/img-dnevna-1.jpg')`
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-gray-900/60 to-black/80"></div>
 
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -635,48 +642,50 @@ function App() {
       </footer>
 
       {/* Image Modal */}
-      {selectedImage && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedImage(null)}
-        >
+      <AnimatePresence>
+        {selectedImage && (
           <motion.div
-            className="relative max-w-4xl max-h-full"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
           >
-            <img
-              src={selectedImage}
-              alt="Puna veličina"
-              className="max-w-full max-h-full object-contain rounded-lg"
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200"
+            <motion.div
+              className="relative max-w-4xl max-h-full"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={32} />
-            </button>
-            <motion.button
-              onClick={() => {
-                const imageName = selectedImage.split('/').pop();
-                downloadImage(imageName);
-                setSelectedImage(null);
-              }}
-              className="absolute top-4 right-16 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Download size={16} />
-              Preuzmi
-            </motion.button>
+              <img
+                src={selectedImage}
+                alt="Puna veličina"
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200"
+              >
+                <X size={32} />
+              </button>
+              <motion.button
+                onClick={() => {
+                  const imageName = selectedImage.split('/').pop();
+                  downloadImage(imageName);
+                  setSelectedImage(null);
+                }}
+                className="absolute top-4 right-16 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg hover:bg-opacity-70 transition-all duration-200 flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Download size={16} />
+                Preuzmi
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
