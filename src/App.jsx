@@ -372,12 +372,6 @@ function App() {
         />
         {/* Enhanced Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-slate-900/40 to-black/60"></div>
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-20"
-             style={{
-               backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.6) 1px, transparent 0)`,
-               backgroundSize: '25px 25px'
-             }}></div>
 
         {/* Enhanced Rainbow Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -832,7 +826,7 @@ function App() {
       <AnimatePresence>
         {selectedImage && currentRoom && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-2 md:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -842,7 +836,7 @@ function App() {
             onTouchEnd={onTouchEnd}
           >
             <motion.div
-              className="relative max-w-7xl max-h-full w-full"
+              className="relative max-w-7xl max-h-full w-full px-2 md:px-4"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
@@ -899,10 +893,10 @@ function App() {
                         e.stopPropagation();
                         goToPreviousImage();
                       }}
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200"
+                      className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 md:p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 touch-manipulation"
                       title="Prethodna slika"
                     >
-                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="md:w-6 md:h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                     </button>
@@ -912,10 +906,10 @@ function App() {
                         e.stopPropagation();
                         goToNextImage();
                       }}
-                      className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all duration-200"
+                      className="absolute right-2 md:right-16 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 md:p-3 rounded-full hover:bg-opacity-70 transition-all duration-200 touch-manipulation"
                       title="Sledeća slika"
                     >
-                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="md:w-6 md:h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
