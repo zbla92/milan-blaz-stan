@@ -16,6 +16,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedPdf, setSelectedPdf] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -265,7 +266,7 @@ function App() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/milan-blaz-stan/images/img-dnevna-1.jpg')`
+            backgroundImage: `url('/milan-blaz-stan/images/img-dnevna-6.jpg')`
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-gray-900/60 to-black/80"></div>
@@ -411,16 +412,18 @@ function App() {
                       className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
                       whileHover={{ scale: 1.02 }}
                     >
-                      <div className="relative group">
-                        <img
-                          src={`/milan-blaz-stan/images/${imageName}`}
-                          alt={`${room.name} - slika ${imgIndex + 1}`}
-                          className="w-full h-64 object-cover cursor-pointer"
-                          onClick={() => setSelectedImage(`/milan-blaz-stan/images/${imageName}`)}
-                        />
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <Eye className="text-white" size={32} />
+                      <div className="relative group cursor-pointer" onClick={() => setSelectedImage(`/milan-blaz-stan/images/${imageName}`)}>
+                        <div className="relative overflow-hidden rounded-lg">
+                          <img
+                            src={`/milan-blaz-stan/images/${imageName}`}
+                            alt={`${room.name} - slika ${imgIndex + 1}`}
+                            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                            <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                              <Eye className="text-gray-800" size={24} />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -487,18 +490,26 @@ function App() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="apple-glass p-6 rounded-xl shadow-lg card-hover"
+                className="apple-glass p-6 rounded-xl shadow-lg card-hover group cursor-pointer"
+                onClick={() => setSelectedPdf(doc)}
+                whileHover={{ scale: 1.02 }}
               >
                 <div className="flex items-start mb-4">
-                  <FileText className="text-gray-700 mr-3 flex-shrink-0" size={24} />
+                  <div className="relative">
+                    <FileText className="text-gray-700 mr-3 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" size={24} />
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{doc.name}</h3>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">{doc.name}</h3>
                     <p className="text-gray-600 text-sm font-light mb-4">{doc.description}</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
                   <motion.button
-                    onClick={() => downloadFile(doc.filename, doc.name + '.pdf')}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      downloadFile(doc.filename, doc.name + '.pdf');
+                    }}
                     className="flex-1 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -506,17 +517,18 @@ function App() {
                     <Download size={16} />
                     Preuzmi PDF
                   </motion.button>
-                  <motion.a
-                    href={`/milan-blaz-stan/documents/${doc.filename}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center"
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPdf(doc);
+                    }}
+                    className="p-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center bg-white/80 group-hover:bg-blue-50 group-hover:border-blue-300 group-hover:text-blue-600"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     title="Pregledaj PDF"
                   >
                     <Eye size={16} />
-                  </motion.a>
+                  </motion.button>
                 </div>
               </motion.div>
             ))}
@@ -652,7 +664,7 @@ function App() {
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
-              className="relative max-w-4xl max-h-full"
+              className="relative max-w-5xl max-h-full"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
@@ -661,11 +673,11 @@ function App() {
               <img
                 src={selectedImage}
                 alt="Puna veličina"
-                className="max-w-full max-h-full object-contain rounded-lg"
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               />
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200"
+                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors duration-200 bg-black/50 rounded-full p-2"
               >
                 <X size={32} />
               </button>
@@ -682,6 +694,63 @@ function App() {
                 <Download size={16} />
                 Preuzmi
               </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* PDF Preview Modal */}
+      <AnimatePresence>
+        {selectedPdf && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPdf(null)}
+          >
+            <motion.div
+              className="relative max-w-6xl max-h-full w-full"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
+                <div className="flex items-center justify-between p-4 border-b bg-gray-50">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800">{selectedPdf.name}</h3>
+                    <p className="text-sm text-gray-600">{selectedPdf.description}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <motion.button
+                      onClick={() => {
+                        downloadFile(selectedPdf.filename, selectedPdf.name + '.pdf');
+                        setSelectedPdf(null);
+                      }}
+                      className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Download size={16} />
+                      Preuzmi
+                    </motion.button>
+                    <button
+                      onClick={() => setSelectedPdf(null)}
+                      className="text-gray-500 hover:text-gray-700 transition-colors duration-200 p-2"
+                    >
+                      <X size={24} />
+                    </button>
+                  </div>
+                </div>
+                <div className="relative">
+                  <iframe
+                    src={`/milan-blaz-stan/documents/${selectedPdf.filename}`}
+                    className="w-full h-[70vh] border-0"
+                    title={selectedPdf.name}
+                  />
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
