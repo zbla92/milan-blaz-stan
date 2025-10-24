@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
+import { 
   Download,
   ChevronDown,
   Menu,
@@ -182,7 +182,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <motion.nav
+      <motion.nav 
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrollY > 50 ? 'apple-glass shadow-lg shadow-gray-200/20' : 'bg-transparent'
         }`}
@@ -192,14 +192,14 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <motion.div
+            <motion.div 
               className="text-2xl font-bold gradient-text"
               whileHover={{ scale: 1.05 }}
             >
               <Home className="inline-block mr-2" size={28} />
               Stan Dizajn
             </motion.div>
-
+            
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
               {[
@@ -232,14 +232,14 @@ function App() {
 
         {/* Mobile Menu */}
         <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="md:hidden apple-glass border-t border-gray-200/50"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-            >
-              <div className="px-4 py-4 space-y-4">
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden apple-glass border-t border-gray-200/50"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+          >
+            <div className="px-4 py-4 space-y-4">
                 {[
                   { name: 'Prostorije', href: '#prostorije' },
                   { name: 'Dokumentacija', href: '#dokumentacija' },
@@ -248,15 +248,15 @@ function App() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block text-gray-800 hover:text-black transition-colors duration-200 font-medium"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  className="block text-gray-800 hover:text-black transition-colors duration-200 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                     {item.name}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
         </AnimatePresence>
       </motion.nav>
 
@@ -270,51 +270,69 @@ function App() {
           }}
         />
         {/* Enhanced Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-slate-900/50 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-slate-900/40 to-black/60"></div>
         {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-10"
+        <div className="absolute inset-0 opacity-20"
              style={{
-               backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)`,
-               backgroundSize: '30px 30px'
+               backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.6) 1px, transparent 0)`,
+               backgroundSize: '25px 25px'
              }}></div>
 
-        {/* Enhanced Floating Elements */}
+        {/* Enhanced Rainbow Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-blue-300/15 to-cyan-300/15 rounded-full blur-2xl"
+            className="absolute top-20 left-10 w-48 h-48 bg-gradient-to-br from-blue-400/25 via-cyan-400/20 to-blue-500/25 rounded-full blur-3xl"
             animate={{
-              y: [0, -25, 0],
-              x: [0, 15, 0],
-              scale: [1, 1.05, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-br from-purple-300/12 to-pink-300/12 rounded-full blur-xl"
-            animate={{
-              y: [0, 30, 0],
-              x: [0, -18, 0],
-              scale: [1, 0.9, 1],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-32 left-20 w-28 h-28 bg-gradient-to-br from-emerald-300/12 to-teal-300/12 rounded-full blur-xl"
-            animate={{
-              y: [0, -25, 0],
+              y: [0, -40, 0],
               x: [0, 25, 0],
-              scale: [1, 1.1, 1],
-              opacity: [0.25, 0.4, 0.25],
+              scale: [1, 1.2, 1],
+              opacity: [0.4, 0.8, 0.4],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute top-40 right-20 w-40 h-40 bg-gradient-to-br from-purple-400/20 via-pink-400/15 to-purple-500/20 rounded-full blur-2xl"
+            animate={{
+              y: [0, 35, 0],
+              x: [0, -30, 0],
+              scale: [1, 0.8, 1],
+              opacity: [0.3, 0.7, 0.3],
+              rotate: [0, -120, -240],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-32 left-20 w-36 h-36 bg-gradient-to-br from-emerald-400/18 via-teal-400/12 to-emerald-500/18 rounded-full blur-2xl"
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 35, 0],
+              scale: [1, 1.3, 1],
+              opacity: [0.35, 0.6, 0.35],
+              rotate: [0, 90, 180],
+            }}
+            transition={{
+              duration: 11,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-40 right-32 w-28 h-28 bg-gradient-to-br from-amber-400/15 via-orange-400/10 to-amber-500/15 rounded-full blur-xl"
+            animate={{
+              y: [0, -25, 0],
+              x: [0, -25, 0],
+              scale: [1, 0.7, 1],
+              opacity: [0.25, 0.5, 0.25],
+              rotate: [0, -60, -120],
             }}
             transition={{
               duration: 9,
@@ -323,21 +341,37 @@ function App() {
             }}
           />
           <motion.div
-            className="absolute bottom-40 right-32 w-20 h-20 bg-gradient-to-br from-amber-300/8 to-orange-300/8 rounded-full blur-lg"
+            className="absolute top-60 left-1/4 w-24 h-24 bg-gradient-to-br from-rose-400/12 via-red-400/8 to-rose-500/12 rounded-full blur-lg"
             animate={{
-              y: [0, -20, 0],
-              x: [0, -20, 0],
-              scale: [1, 0.8, 1],
-              opacity: [0.15, 0.3, 0.15],
+              y: [0, 20, 0],
+              x: [0, 40, 0],
+              scale: [1, 1.4, 1],
+              opacity: [0.2, 0.4, 0.2],
+              rotate: [0, 150, 300],
             }}
             transition={{
-              duration: 7,
+              duration: 13,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-60 right-1/4 w-32 h-32 bg-gradient-to-br from-violet-400/15 via-indigo-400/10 to-violet-500/15 rounded-full blur-xl"
+            animate={{
+              y: [0, -35, 0],
+              x: [0, 20, 0],
+              scale: [1, 0.9, 1],
+              opacity: [0.3, 0.6, 0.3],
+              rotate: [0, -90, -180],
+            }}
+            transition={{
+              duration: 14,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
         </div>
-
+        
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -352,27 +386,27 @@ function App() {
               </div>
             </div>
           </motion.div>
-
+          
           <motion.h1
             className="text-6xl md:text-8xl font-bold mb-8 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="bg-gradient-to-r from-white via-blue-50 to-white bg-clip-text text-transparent drop-shadow-2xl">
+            <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent drop-shadow-2xl filter brightness-110">
               Dizajn Stana
             </span>
           </motion.h1>
-
+          
           <motion.p
-            className="text-xl md:text-3xl text-white mb-12 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-lg"
+            className="text-xl md:text-3xl text-white/95 mb-12 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Kompletna dokumentacija i vizuali dizajna stana za izradu ponuda
           </motion.p>
-
+          
           <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
@@ -399,15 +433,15 @@ function App() {
             </motion.button>
           </motion.div>
         </div>
-
+        
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="flex flex-col items-center gap-2">
-            <span className="text-white/70 text-sm font-light drop-shadow-md">Skroluj dole</span>
-            <ChevronDown className="text-white/70 drop-shadow-md" size={28} />
+            <span className="text-white/80 text-sm font-medium drop-shadow-lg">Skroluj dole</span>
+            <ChevronDown className="text-white/80 drop-shadow-lg" size={32} />
           </div>
         </motion.div>
       </section>
@@ -422,8 +456,8 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Prostorije Stana</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
+            <h2 className="text-5xl font-bold mb-6 text-gray-800 drop-shadow-lg">Prostorije Stana</h2>
+            <p className="text-gray-700 text-xl max-w-3xl mx-auto font-light leading-relaxed">
               Detaljni prikazi svih prostorija sa fotografijama i opisima
             </p>
           </motion.div>
@@ -447,7 +481,7 @@ function App() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {room.images.map((imageName, imgIndex) => (
-                    <motion.div
+                  <motion.div
                       key={imgIndex}
                       className="apple-glass rounded-xl overflow-hidden shadow-lg card-hover"
                       whileHover={{ scale: 1.02 }}
@@ -513,8 +547,8 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 gradient-text">Tehnička Dokumentacija</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
+            <h2 className="text-5xl font-bold mb-6 text-gray-800 drop-shadow-lg">Tehnička Dokumentacija</h2>
+            <p className="text-gray-700 text-xl max-w-3xl mx-auto font-light leading-relaxed">
               Svi potrebni planovi i specifikacije za izradu ponuda
             </p>
           </motion.div>
@@ -612,8 +646,8 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold mb-6 gradient-text">Kontakt Informacije</h2>
-            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto font-light">
+            <h2 className="text-5xl font-bold mb-6 text-gray-800 drop-shadow-lg">Kontakt Informacije</h2>
+            <p className="text-gray-700 text-xl mb-8 max-w-3xl mx-auto font-light leading-relaxed">
               Za izradu ponuda i dodatne informacije, kontaktirajte nas
             </p>
 
