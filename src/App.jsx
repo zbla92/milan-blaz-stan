@@ -262,46 +262,24 @@ function App() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Background Image with Gradient Overlay */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('/milan-blaz-stan/images/img-dnevna-6.jpg')`
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-gray-900/60 to-black/80"></div>
+        {/* Modern Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-20"
+               style={{
+                 backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+                 backgroundSize: '20px 20px'
+               }}></div>
+        </div>
 
-        {/* Floating Elements */}
+        {/* Enhanced Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-20 h-20 bg-gray-200/30 rounded-full opacity-40"
+            className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-xl"
             animate={{
-              y: [0, -20, 0],
-              x: [0, 10, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-40 right-20 w-16 h-16 bg-gray-300/20 rounded-full opacity-30"
-            animate={{
-              y: [0, 20, 0],
-              x: [0, -15, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-32 left-20 w-12 h-12 bg-gray-400/20 rounded-full opacity-30"
-            animate={{
-              y: [0, -15, 0],
+              y: [0, -30, 0],
               x: [0, 20, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: 6,
@@ -309,31 +287,75 @@ function App() {
               ease: "easeInOut"
             }}
           />
+          <motion.div
+            className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full blur-lg"
+            animate={{
+              y: [0, 25, 0],
+              x: [0, -20, 0],
+              scale: [1, 0.8, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-32 left-20 w-20 h-20 bg-gradient-to-br from-emerald-400/15 to-teal-400/15 rounded-full blur-lg"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 30, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-40 right-32 w-16 h-16 bg-gradient-to-br from-amber-400/10 to-orange-400/10 rounded-full blur-md"
+            animate={{
+              y: [0, -15, 0],
+              x: [0, -25, 0],
+              scale: [1, 0.9, 1],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
 
-        <div className="relative z-10 text-center px-4">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="mb-8"
+            className="mb-12"
           >
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 text-4xl font-bold shadow-lg">
-              <Home size={48} />
+            <div className="relative mx-auto mb-8 w-40 h-40">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl"></div>
+              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-white/90 to-gray-100/90 backdrop-blur-sm flex items-center justify-center shadow-2xl border border-white/20">
+                <Home className="text-slate-700" size={64} />
+              </div>
             </div>
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-6xl md:text-8xl font-bold mb-8 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="gradient-text">Dizajn Stana</span>
+            <span className="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent drop-shadow-lg">
+              Dizajn Stana
+            </span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-light"
+            className="text-xl md:text-3xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -342,33 +364,41 @@ function App() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <button
+            <motion.button
               onClick={() => document.getElementById('prostorije').scrollIntoView({ behavior: 'smooth' })}
-              className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2 font-medium"
+              className="group bg-white text-slate-900 px-10 py-4 rounded-full hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-3 font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Eye size={20} />
+              <Eye size={22} className="group-hover:text-blue-600 transition-colors duration-300" />
               Pregledaj Prostorije
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={() => document.getElementById('dokumentacija').scrollIntoView({ behavior: 'smooth' })}
-              className="border-2 border-black text-black px-8 py-3 rounded-full hover:bg-black hover:text-white transition-all duration-200 font-medium"
+              className="group bg-transparent border-2 border-white/30 text-white px-10 py-4 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 flex items-center justify-center gap-3 font-semibold backdrop-blur-sm transform hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
+              <FileText size={22} className="group-hover:text-blue-300 transition-colors duration-300" />
               Dokumentacija
-            </button>
+            </motion.button>
           </motion.div>
         </div>
 
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="text-gray-400" size={32} />
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-white/60 text-sm font-light">Skroluj dole</span>
+            <ChevronDown className="text-white/60" size={28} />
+          </div>
         </motion.div>
       </section>
 
